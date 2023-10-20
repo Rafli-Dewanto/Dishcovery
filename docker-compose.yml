@@ -1,17 +1,8 @@
 version: "3.8"
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/app
-      - /app/node_modules
   mysql:
     image: mysql:8.1.0
-    container_name: mysql_db
+    container_name: dishcovery_db
     environment:
       MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
