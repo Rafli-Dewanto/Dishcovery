@@ -1,17 +1,17 @@
-import Footer from '@/components/footer'
-import Navbar from '@/components/navbar'
-import React from 'react'
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import React from "react";
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <Navbar />
-            {children}
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
 }

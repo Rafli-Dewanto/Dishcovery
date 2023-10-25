@@ -1,3 +1,3 @@
-export { default } from "next-auth/middleware"
+export { default } from "next-auth/middleware";
 
-export const config = { matcher: ["/route-to-protect"] }
+export const config = { matcher: ["/route-to-protect"] };

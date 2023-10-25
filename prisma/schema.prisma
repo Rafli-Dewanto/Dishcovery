@@ -11,18 +11,18 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String   @map("provider_account_id")
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,6 +48,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  // custom fields
+  recipes       Recipe[]  @relation("userRecipes")
+  ratings       Rating[]  @relation("userRating")
+  comment       Comment[] @relation("userComment")
 
   @@map("users")
 }
@@ -59,4 +63,52 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Recipe {
+  id           String    @id @default(cuid())
+  userId       String    @map("user_id")
+  name         String    @db.VarChar(50)
+  calories     Int
+  description  String    @db.Text
+  instructions String    @db.LongText
+  image        String
+  cuisineType  String    @map("cuisine_type") @db.VarChar(30)
+  avgRating    Decimal   @default(0) @map("avg_rating") @db.Decimal(1, 1)
+  comments     Comment[] @relation("recipeComment")
+  ratings      Rating[]  @relation("recipeRating")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user User @relation("userRecipes", fields: [userId], references: [id])
+
+  @@map("recipes")
+}
+
+model Rating {
+  id        String   @id @default(cuid())
+  recipeId  String   @map("recipe_id")
+  userId    String   @map("user_id")
+  score     Decimal  @db.Decimal(1, 1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation("userRating", fields: [userId], references: [id])
+  recipe Recipe @relation("recipeRating", fields: [recipeId], references: [id])
+
+  @@map("ratings")
+}
+
+model Comment {
+  id             String   @id @default(cuid())
+  recipeId       String   @map("recipe_id")
+  userId         String   @map("user_id")
+  commentSection String   @map("comment_section") @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user   User   @relation("userComment", fields: [userId], references: [id])
+  recipe Recipe @relation("recipeComment", fields: [recipeId], references: [id])
+
+  @@map("comments")
 }

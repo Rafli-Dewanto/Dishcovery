@@ -1,19 +1,27 @@
-import { getServerSession } from "next-auth";
+"use client";
+
 import { redirect } from "next/navigation";
-import { options } from "../api/auth/[...nextauth]/options";
+import InstructionsEditor from "@/components/wysiwyg/instructions-editor";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
-export default async function ProtectedPage() {
-    const session = await getServerSession(options);
+export default function ProtectedPage() {
+  const session = useSession();
+  const [instructions, setInstructions] = useState("");
 
-    if (!session || !session.user) {
-        redirect('/api/auth/signin?callbackUrl=/protected') // redirect to this page after sign in
-    }
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/protected"); // redirect to this page after sign in
+  }
 
-    return (
-        <>
-            <section>
-                hello {session?.user?.name}
-            </section>
-        </>
-    )
+  return (
+    <>
+      <section>hello {session?.data?.user?.name}</section>
+      <InstructionsEditor
+        instructions={instructions}
+        setInstructions={setInstructions}
+      />
+
+      <p dangerouslySetInnerHTML={{ __html: instructions }}></p>
+    </>
+  );
 }
