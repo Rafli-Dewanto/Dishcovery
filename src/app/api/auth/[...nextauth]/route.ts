@@ -1,5 +1,5 @@
-import { options } from "@/lib/auth-options";
-import NextAuth, { getServerSession } from "next-auth";
+import { options } from '@/lib/auth-options';
+import NextAuth, { getServerSession } from 'next-auth';
 
 export const handler = NextAuth(options);
 

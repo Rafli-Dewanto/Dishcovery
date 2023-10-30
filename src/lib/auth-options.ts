@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/db";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import GoogleProvider from "next-auth/providers/google";
-import type { NextAuthOptions } from "next-auth";
+import { prisma } from '@/lib/db';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import GoogleProvider from 'next-auth/providers/google';
+import type { NextAuthOptions } from 'next-auth';
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -12,6 +12,6 @@ export const options: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
+    signIn: '/auth/signin',
   },
 };

@@ -1,18 +1,30 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import React, { useRef, useState } from "react";
-import logo from "@/assets/svg/dishcovery.svg";
-import { signIn, useSession } from "next-auth/react";
-import UserButton from "./ui/user-button";
-import { useOnClickOutside } from "usehooks-ts";
-import Link from "next/link";
+import Image from 'next/image';
+import React, { useRef, useState } from 'react';
+import logo from '@/assets/svg/dishcovery.svg';
+import logoMobile from '@/assets/svg/logo.svg';
+import { signOut, useSession } from 'next-auth/react';
+import UserButton from './ui/user-button';
+import { useOnClickOutside } from 'usehooks-ts';
+import Link from 'next/link';
+// shadcn sheet
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { LogOut, Menu } from 'lucide-react';
+import { Button } from './ui/button';
+import { Separator } from './ui/separator';
+import { default as SignInButton } from './ui/signin-button';
 
 export default function Navbar() {
   const { data: session } = useSession();
   const ref = useRef(null);
   const [isActive, setIsactive] = useState(false);
-  const [isMobile, setisMobile] = useState(false);
   useOnClickOutside(ref, () => setIsactive(false));
 
   return (
@@ -27,16 +39,16 @@ export default function Navbar() {
       "
     >
       {/* logo */}
-      <Link href={"/"}>
+      <Link href={'/'}>
         <Image src={logo} alt="logo" width={250} height={250} />
       </Link>
       {/* menu */}
-      <nav>
+      <nav className="hidden sm:block">
         <ul className="flex items-center justify-center space-x-6 px-2">
           <li>
             <Link
               className="font-medium transition-all hover:text-core-accent-400"
-              href={"/"}
+              href={'/'}
             >
               Home
             </Link>
@@ -44,7 +56,7 @@ export default function Navbar() {
           <li>
             <Link
               className="font-medium transition-all hover:text-core-accent-400"
-              href={"/recipes"}
+              href={'/recipes'}
             >
               Explore
             </Link>
@@ -52,7 +64,7 @@ export default function Navbar() {
           <li>
             <Link
               className="font-medium transition-all hover:text-core-accent-400"
-              href={"/"}
+              href={'/'}
             >
               About
             </Link>
@@ -68,21 +80,77 @@ export default function Navbar() {
               />
             </li>
           ) : (
-            <button
-              className="
-            rounded-xl bg-core-accent-400 
-            px-3 py-2 font-medium
-            capitalize text-white
-            transition-all
-            hover:scale-105
-            active:scale-100
-            "
-              onClick={() => signIn()}
-            >
-              sign in
-            </button>
+            <SignInButton />
           )}
         </ul>
+      </nav>
+      {/* responsive nav */}
+      <nav className="relative sm:hidden">
+        <Sheet>
+          <SheetTrigger>
+            <Menu />
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle className="flex items-center justify-center">
+                <Image src={logoMobile} width={50} height={50} alt="logo" />
+              </SheetTitle>
+              {/* menu */}
+              <section className="my-20 grid grid-cols-1 space-y-4">
+                <div className="mt-5 flex items-center justify-center">
+                  {session && session.user ? (
+                    <section
+                      className="
+                    cursor-pointe flex 
+                    flex-col 
+                    items-center 
+                    space-y-4
+                    rounded-xl
+                    px-6
+                    py-2"
+                    >
+                      <Image
+                        width={40}
+                        height={40}
+                        src={session.user.image as string}
+                        alt="avatar"
+                        className="rounded-full"
+                      />
+                      <p>{session.user.name}</p>
+                    </section>
+                  ) : (
+                    <SignInButton />
+                  )}
+                </div>
+                <Separator />
+                <SheetTrigger asChild>
+                  <Link href={'/'}>Home</Link>
+                </SheetTrigger>
+                <SheetTrigger asChild>
+                  <Link href={'/recipes'}>Explore</Link>
+                </SheetTrigger>
+                <SheetTrigger asChild>
+                  <Link href={'/about'}>About</Link>
+                </SheetTrigger>
+                <Button
+                  onClick={() => signOut()}
+                  className={`
+                ${session?.user ? '' : 'hidden'} 
+                absolute bottom-5 
+                right-4 
+                border
+                border-pueblo-500 bg-white text-slate-950
+                hover:bg-pueblo-50`}
+                >
+                  Sign Out
+                  <span>
+                    <LogOut className="ml-2 text-pueblo-600" />
+                  </span>
+                </Button>
+              </section>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
       </nav>
     </header>
   );

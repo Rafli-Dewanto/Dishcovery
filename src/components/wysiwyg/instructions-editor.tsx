@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
 type InstructionsEditorProps = {
   instructions: string;
@@ -17,7 +17,7 @@ const InstructionsEditor: React.FC<InstructionsEditorProps> = ({
     extensions: [StarterKit],
     editorProps: {
       attributes: {
-        class: "rounded-md border min-h-[150px] border-input w-[25%]",
+        class: 'rounded-md border min-h-[150px] border-input w-[25%]',
       },
     },
     onUpdate({ editor }) {

@@ -1,15 +1,15 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import SessionProvider from "@/components/session-provider";
-import { EdgeStoreProvider } from "@/lib/edgestore";
-import { getAuthSession } from "./api/auth/[...nextauth]/route";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import SessionProvider from '@/components/session-provider';
+import { EdgeStoreProvider } from '@/lib/edgestore';
+import { getAuthSession } from './api/auth/[...nextauth]/route';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Dishcovery",
-  description: "Dishcovery: Where Every Bite Tells a Story!",
+  title: 'Dishcovery',
+  description: 'Dishcovery: Where Every Bite Tells a Story!',
 };
 
 export default async function RootLayout({

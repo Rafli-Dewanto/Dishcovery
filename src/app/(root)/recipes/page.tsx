@@ -1,13 +1,13 @@
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
-import RecipeCard from "@/components/ui/recipe-card";
-import { redirect } from "next/navigation";
-import React from "react";
+import { getAuthSession } from '@/app/api/auth/[...nextauth]/route';
+import RecipeCard from '@/components/ui/recipe-card';
+import { redirect } from 'next/navigation';
+import React from 'react';
 
 export default async function Page() {
   const session = await getAuthSession();
 
   if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/recipes");
+    redirect('/api/auth/signin?callbackUrl=/recipes');
   }
 
   return (

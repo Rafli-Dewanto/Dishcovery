@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { signOut } from "next-auth/react";
-import Image from "next/image";
-import React from "react";
-import { Separator } from "@/components/ui/separator";
+import { signOut } from 'next-auth/react';
+import Image from 'next/image';
+import React from 'react';
+import { Separator } from '@/components/ui/separator';
 
 type UserButtonProps = {
   profilePic: string;
@@ -57,7 +57,7 @@ export default function UserButton({
               width={40}
               height={40}
               src={image}
-              alt={"avatar"}
+              alt={'avatar'}
             />
             <p className="font-semibold">{username}</p>
             {/* user menu */}
