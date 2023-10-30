@@ -7,7 +7,6 @@ import { useState } from 'react';
 export default function SingleImageDropzoneUsage() {
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
-  
 
   return (
     <div>
@@ -24,10 +23,9 @@ export default function SingleImageDropzoneUsage() {
           console.log(typeof file);
           console.log(file);
           if (file) {
-
             const res = await edgestore.publicImages.upload({
               file,
-            })
+            });
             // you can run some server action or api here
             // to add the necessary data to your database
             console.log(res);

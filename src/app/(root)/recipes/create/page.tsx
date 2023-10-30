@@ -18,8 +18,9 @@ import { SingleImageDropzone } from '@/components/upload/single-image';
 import { Textarea } from '@/components/ui/textarea';
 import * as z from 'zod';
 import InstructionsEditor from '@/components/wysiwyg/instructions-editor';
-import { useState } from 'react';
-import { register } from 'module';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+import { useEdgeStore } from '@/lib/edgestore';
 
 export const recipeSchema = z.object({
   name: z.string().min(2).max(50),
@@ -31,14 +32,31 @@ export const recipeSchema = z.object({
 });
 
 const CreateRecipePage = () => {
-  const [file, setFile] = useState<File>();
+  const { data: session } = useSession();
+  const { edgestore } = useEdgeStore();
+  if (!session) {
+    redirect('/auth/signin?callbackUrl=/recipes/create');
+  }
   const form = useForm<TRecipe>({
     resolver: zodResolver(recipeSchema),
   });
-  
 
-  function onSubmit(data: TRecipe) {
-    console.log(data);
+  async function onSubmit(formData: TRecipe) {
+    if (formData.image) {
+      const imageRes = await edgestore.publicImages.upload({
+        file: formData.image,
+      });
+      const res = await fetch('/api/recipes', {
+        method: 'POST',
+        body: JSON.stringify({ ...formData, image: imageRes.url }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: String(session),
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+    }
   }
 
   return (
@@ -54,9 +72,7 @@ const CreateRecipePage = () => {
                 <FormControl>
                   <Input placeholder="Recipe title" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Your Recipe Title
-                </FormDescription>
+                <FormDescription>Your Recipe Title</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -68,7 +84,7 @@ const CreateRecipePage = () => {
               <FormItem>
                 <FormLabel>Calories</FormLabel>
                 <FormControl>
-                  <Input type='number' placeholder="calories" {...field} />
+                  <Input type="number" placeholder="calories" {...field} />
                 </FormControl>
                 <FormDescription>
                   How much calories your recipe contains
@@ -102,9 +118,7 @@ const CreateRecipePage = () => {
                 <FormControl>
                   <InstructionsEditor onChange={field.onChange} />
                 </FormControl>
-                <FormDescription>
-                  Explain how to make it!
-                </FormDescription>
+                <FormDescription>Explain how to make it!</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -119,7 +133,8 @@ const CreateRecipePage = () => {
                   <Input placeholder="cuisine type" {...field} />
                 </FormControl>
                 <FormDescription>
-                  What type of cuisine this recipe is? (e.g chinese, mexican etc)
+                  What type of cuisine this recipe is? (e.g chinese, mexican
+                  etc)
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -132,11 +147,14 @@ const CreateRecipePage = () => {
               <FormItem>
                 <FormLabel>Upload your recipe image</FormLabel>
                 <FormControl>
-                  <SingleImageDropzone value={field.value} onChange={field.onChange} width={200} height={200} />
+                  <SingleImageDropzone
+                    value={field.value}
+                    onChange={field.onChange}
+                    width={200}
+                    height={200}
+                  />
                 </FormControl>
-                <FormDescription>
-                  Recipe Image
-                </FormDescription>
+                <FormDescription>Recipe Image</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
