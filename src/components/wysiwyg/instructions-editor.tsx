@@ -4,24 +4,21 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 type InstructionsEditorProps = {
-  instructions: string;
-  setInstructions: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (richText: string) => void,
 };
 
 const InstructionsEditor: React.FC<InstructionsEditorProps> = ({
-  instructions,
-  setInstructions,
+  onChange
 }) => {
   const editor = useEditor({
-    content: instructions,
     extensions: [StarterKit],
     editorProps: {
       attributes: {
-        class: 'rounded-md border min-h-[150px] border-input w-[25%]',
+        class: 'rounded-md border min-h-[150px] px-3 border-input w-[80%] max-w-full focus:outline-slate-950 py-2',
       },
     },
     onUpdate({ editor }) {
-      setInstructions(editor.getHTML());
+      onChange(editor.getHTML())
     },
   });
 

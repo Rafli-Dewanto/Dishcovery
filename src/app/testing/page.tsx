@@ -1,17 +1,41 @@
-async function submitData(formData: FormData) {
-  'use server';
-  const data = formData.get('title')?.valueOf();
-}
+'use client';
 
-const TestingPage = () => {
+import { SingleImageDropzone } from '@/components/upload/single-image';
+import { useEdgeStore } from '@/lib/edgestore';
+import { useState } from 'react';
+
+export default function SingleImageDropzoneUsage() {
+  const [file, setFile] = useState<File>();
+  const { edgestore } = useEdgeStore();
+  
+
   return (
-    <main>
-      <form action={submitData}>
-        <input type="text" name="tile" />
-        <input type="submit" value="submit" />
-      </form>
-    </main>
-  );
-};
+    <div>
+      <SingleImageDropzone
+        width={200}
+        height={200}
+        value={file}
+        onChange={(file) => {
+          setFile(file);
+        }}
+      />
+      <button
+        onClick={async () => {
+          console.log(typeof file);
+          console.log(file);
+          if (file) {
 
-export default TestingPage;
+            const res = await edgestore.publicImages.upload({
+              file,
+            })
+            // you can run some server action or api here
+            // to add the necessary data to your database
+            console.log(res);
+          }
+        }}
+      >
+        Upload
+      </button>
+    </div>
+  );
+}
