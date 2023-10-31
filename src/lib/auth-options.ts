@@ -5,6 +5,7 @@ import type { NextAuthOptions } from 'next-auth';
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -13,5 +14,20 @@ export const options: NextAuthOptions = {
   ],
   pages: {
     signIn: '/auth/signin',
+  },
+  callbacks: {
+    async session({ session, token, user }) {
+      const getToken = await prisma.account.findFirst({
+        where: {
+          userId: user.id,
+        },
+      });
+      let accessToken: string | null = null;
+      if (getToken) {
+        accessToken = getToken.access_token!;
+      }
+      session.user.token = accessToken;
+      return session;
+    },
   },
 };
