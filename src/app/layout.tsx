@@ -1,11 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { GeistSans } from "geist/font";
 import SessionProvider from '@/components/session-provider';
 import { EdgeStoreProvider } from '@/lib/edgestore';
 import { getAuthSession } from './api/auth/[...nextauth]/route';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Dishcovery',
@@ -20,9 +18,11 @@ export default async function RootLayout({
   const session = await getAuthSession();
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={GeistSans.className}>
         <SessionProvider session={session}>
-          <EdgeStoreProvider>{children}</EdgeStoreProvider>
+          <EdgeStoreProvider>
+            {children}
+          </EdgeStoreProvider>
         </SessionProvider>
       </body>
     </html>

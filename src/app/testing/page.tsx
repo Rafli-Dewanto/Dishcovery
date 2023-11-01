@@ -1,5 +1,6 @@
 'use client';
 
+import PrimaryButton from '@/components/ui/primary-button';
 import { SingleImageDropzone } from '@/components/upload/single-image';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
@@ -34,6 +35,7 @@ export default function SingleImageDropzoneUsage() {
       >
         Upload
       </button>
+      <PrimaryButton onClick={() => console.log('test')}>test</PrimaryButton>
     </div>
   );
 }

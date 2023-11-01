@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/app/api/auth/[...nextauth]/route';
 import RecipeCard from '@/components/ui/recipe-card';
 import { prisma } from '@/lib/db';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 async function getRecipes() {
@@ -11,7 +12,7 @@ async function getRecipes() {
 export default async function Page() {
   const recipes = await getRecipes();
   const session = await getAuthSession();
-  
+
   if (!session) {
     redirect('/api/auth/signin?callbackUrl=/recipes');
   }
@@ -29,12 +30,16 @@ export default async function Page() {
     "
     >
       {recipes.map((recipe, idx) => (
-        <RecipeCard
-          key={recipe.id}
-          description={recipe.description}
-          image={recipe.image}
-          title={recipe.name}
-        />
+        <>
+          <Link href={`/recipes/${recipe.id}`}>
+            <RecipeCard
+              key={recipe.id}
+              description={recipe.description}
+              image={recipe.image}
+              title={recipe.name}
+            />
+          </Link>
+        </>
       ))}
       <RecipeCard
         description="lorem ipsum"

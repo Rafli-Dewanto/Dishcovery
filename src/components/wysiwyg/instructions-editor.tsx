@@ -11,7 +11,7 @@ const InstructionsEditor: React.FC<InstructionsEditorProps> = ({
   onChange,
 }) => {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure()],
     editorProps: {
       attributes: {
         class:
