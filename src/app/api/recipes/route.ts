@@ -93,7 +93,7 @@ export async function POST(request: Request) {
       },
     );
   } catch (error) {
-    const errorMessage = getErrorMessage(error)
+    const errorMessage = getErrorMessage(error);
     return NextResponse.json(
       {
         message: `Internal Server Error: ${errorMessage}`,

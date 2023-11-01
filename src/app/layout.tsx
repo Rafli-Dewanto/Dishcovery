@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { GeistSans } from "geist/font";
+import { GeistSans } from 'geist/font';
 import SessionProvider from '@/components/session-provider';
 import { EdgeStoreProvider } from '@/lib/edgestore';
 import { getAuthSession } from './api/auth/[...nextauth]/route';
@@ -20,9 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={GeistSans.className}>
         <SessionProvider session={session}>
-          <EdgeStoreProvider>
-            {children}
-          </EdgeStoreProvider>
+          <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </SessionProvider>
       </body>
     </html>

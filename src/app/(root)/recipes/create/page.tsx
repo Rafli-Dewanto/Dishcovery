@@ -21,7 +21,7 @@ import { default as InstructionsEditor } from '@/components/wysiwyg/instructions
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useEdgeStore } from '@/lib/edgestore';
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-hot-toast';
 import { Terminal } from 'lucide-react';
 import { useState } from 'react';
 import { getErrorMessage } from '@/utils/get-error';
@@ -41,7 +41,7 @@ const CreateRecipePage = () => {
   const form = useForm<TRecipe>({
     resolver: zodResolver(recipeSchema),
   });
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
   if (!session) {
     redirect('/auth/signin?callbackUrl=/recipes/create');
   }
@@ -54,26 +54,30 @@ const CreateRecipePage = () => {
         });
         const res = await fetch('/api/recipes', {
           method: 'POST',
-          body: JSON.stringify({ ...formData, image: imageResponse.url, author: session?.user.email }),
+          body: JSON.stringify({
+            ...formData,
+            image: imageResponse.url,
+            author: session?.user.email,
+          }),
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + session?.user.token
+            Authorization: 'Bearer ' + session?.user.token,
           },
         });
         const data = await res.json();
-        setAlertMessage(data.message)
-        toast.success(alertMessage)
+        setAlertMessage(data.message);
+        toast.success(alertMessage);
         form.reset();
       } catch (error) {
-        const message = getErrorMessage(error)
-        setAlertMessage(message)
-        toast.error(alertMessage)
+        const message = getErrorMessage(error);
+        setAlertMessage(message);
+        toast.error(alertMessage);
       }
     }
   }
 
   return (
-    <section className="container min-h-screen relative">
+    <section className="container relative min-h-screen">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -174,13 +178,16 @@ const CreateRecipePage = () => {
           />
           <Button
             disabled={form.formState.isSubmitting}
-            className='
+            className="
           bg-pueblo-500
           transition-all
-          active:scale-100 
           hover:scale-105 
-          hover:bg-pueblo-600'
-            type="submit">{form.formState.isSubmitting ? "loading" : 'Submit'}</Button>
+          hover:bg-pueblo-600 
+          active:scale-100"
+            type="submit"
+          >
+            {form.formState.isSubmitting ? 'loading' : 'Submit'}
+          </Button>
         </form>
       </Form>
     </section>

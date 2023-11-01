@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 async function getRecipes() {
-  const data = await prisma.recipe.findMany()
-  return data
+  const data = await prisma.recipe.findMany();
+  return data;
 }
 
 export default async function Page() {
