@@ -23,7 +23,7 @@ import useScroll from '@/hooks/use-scrolling';
 
 export default function Navbar() {
   const { data: session } = useSession();
-  const { scrolling } = useScroll()
+  const { scrolling } = useScroll();
   const ref = useRef(null);
   const [isActive, setIsactive] = useState(false);
   useOnClickOutside(ref, () => setIsactive(false));
@@ -37,9 +37,13 @@ export default function Navbar() {
       justify-between 
       px-4 
       py-6
-      ${scrolling ? 'bg-white bg-opacity-70 backdrop-blur-2xl' : 'bg-transparent'}
-      `
-      }>
+      ${
+        scrolling
+          ? 'bg-white bg-opacity-70 backdrop-blur-2xl'
+          : 'bg-transparent'
+      }
+      `}
+    >
       {/* logo */}
       <Link href={'/'}>
         <Image src={logo} alt="logo" width={250} height={250} />
