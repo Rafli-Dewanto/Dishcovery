@@ -26,17 +26,20 @@ export default function Home() {
       >
         <h1
           className="
-        bg-gradient-to-r 
-        from-core-text-400 to-core-accent-400 
-        bg-clip-text py-2 
+        py-2 
         text-start
-        text-3xl font-bold
-        text-transparent 
+        text-3xl font-bold 
         sm:text-4xl
         md:text-5xl
         "
         >
-          Dishcovery - Where every bite tells a story!
+          <span className="text-pueblo-900">Dishcovery</span>{' '}
+          <span
+            className="bg-gradient-to-r 
+        from-core-text-400 to-core-accent-400 bg-clip-text text-transparent"
+          >
+            Where every bite tells a story!
+          </span>
         </h1>
         <h3 className="text-base font-normal text-slate-600 sm:text-lg">
           share your culinary secrets, and explore a world of flavors with
@@ -51,7 +54,7 @@ export default function Home() {
             hover:bg-core-accent-500
             "
           >
-            Dishcover Recipes 🍽️
+            Get Started 🍽️
           </Button>
         </Link>
       </motion.section>
