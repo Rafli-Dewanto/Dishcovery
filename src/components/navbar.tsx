@@ -8,7 +8,6 @@ import { signOut, useSession } from 'next-auth/react';
 import UserButton from './ui/user-button';
 import { useOnClickOutside } from 'usehooks-ts';
 import Link from 'next/link';
-// shadcn sheet
 import {
   Sheet,
   SheetContent,
@@ -20,9 +19,11 @@ import { LogOut, Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { default as SignInButton } from './ui/signin-button';
+import useScroll from '@/hooks/use-scrolling';
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const { scrolling } = useScroll()
   const ref = useRef(null);
   const [isActive, setIsactive] = useState(false);
   useOnClickOutside(ref, () => setIsactive(false));
@@ -30,14 +31,15 @@ export default function Navbar() {
   return (
     <header
       id="#home"
-      className="
+      className={`
       sticky top-0 
       z-50 flex 
-      justify-between bg-white 
-      bg-opacity-70 px-4 
-      py-6 backdrop-blur-2xl
-      "
-    >
+      justify-between 
+      px-4 
+      py-6
+      ${scrolling ? 'bg-white bg-opacity-70 backdrop-blur-2xl' : 'bg-transparent'}
+      `
+      }>
       {/* logo */}
       <Link href={'/'}>
         <Image src={logo} alt="logo" width={250} height={250} />
