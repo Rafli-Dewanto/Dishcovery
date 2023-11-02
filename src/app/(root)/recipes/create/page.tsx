@@ -1,6 +1,6 @@
 'use client';
 
-import { type TRecipe } from '@/lib/types/recipe';
+import { recipeSchema, type Recipe } from '@/lib/types/recipe';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -16,37 +16,28 @@ import {
 import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/upload/single-image';
 import { Textarea } from '@/components/ui/textarea';
-import * as z from 'zod';
 import { default as InstructionsEditor } from '@/components/wysiwyg/instructions-editor';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useEdgeStore } from '@/lib/edgestore';
 import { toast } from 'react-hot-toast';
-import { Terminal } from 'lucide-react';
 import { useState } from 'react';
 import { getErrorMessage } from '@/utils/get-error';
-
-export const recipeSchema = z.object({
-  name: z.string().min(2).max(50),
-  image: z.instanceof(File),
-  calories: z.string(),
-  description: z.string().min(5).max(100),
-  instructions: z.string().min(10),
-  cuisine_type: z.string().min(3),
-});
 
 const CreateRecipePage = () => {
   const { data: session } = useSession();
   const { edgestore } = useEdgeStore();
-  const form = useForm<TRecipe>({
+  const form = useForm<Recipe>({
     resolver: zodResolver(recipeSchema),
+    mode: 'onChange',
   });
   const [alertMessage, setAlertMessage] = useState('');
+
   if (!session) {
     redirect('/auth/signin?callbackUrl=/recipes/create');
   }
 
-  async function onSubmit(formData: TRecipe) {
+  async function onSubmit(formData: Recipe) {
     if (formData.image) {
       try {
         const imageResponse = await edgestore.publicImages.upload({

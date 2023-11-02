@@ -1,8 +1,10 @@
 import { prisma } from '@/lib/db';
 import { getErrorMessage } from '@/utils/get-error';
 import Image from 'next/image';
+import { default as DOMPurify } from 'dompurify';
+import { JSDOM } from 'jsdom';
 
-const RecipeDetail = async ({ params }: { params: { slug: string } }) => {
+const RecipeDetailPage = async ({ params }: { params: { slug: string } }) => {
   // recipe is type string | object recipe | null
   const { data: recipe, errorMessage: error } = await getRecipe(params.slug);
 
@@ -22,9 +24,13 @@ const RecipeDetail = async ({ params }: { params: { slug: string } }) => {
         <pre>Calories: {recipe?.calories}</pre>
         <p>{recipe?.description}</p>
         <article
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify(new JSDOM('<!DOCTYPE html>').window).sanitize(
+              recipe.instructions,
+            ),
+          }}
           className="bg-red-400"
-          dangerouslySetInnerHTML={{ __html: recipe?.instructions }}
-        />
+        ></article>
       </main>
     );
   } else {
@@ -37,13 +43,13 @@ const RecipeDetail = async ({ params }: { params: { slug: string } }) => {
   }
 };
 
-async function getRecipe(id: string) {
+async function getRecipe(slug: string) {
   let data;
   let errorMessage;
   try {
     data = await prisma.recipe.findFirst({
       where: {
-        id: id,
+        id: slug,
       },
     });
   } catch (error) {
@@ -53,4 +59,4 @@ async function getRecipe(id: string) {
   return { data, errorMessage };
 }
 
-export default RecipeDetail;
+export default RecipeDetailPage;

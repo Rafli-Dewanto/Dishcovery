@@ -1,20 +1,8 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/db';
-import * as z from 'zod';
 import { getErrorMessage } from '@/utils/get-error';
-
-const payloadSchema = z.object({
-  name: z.string().min(2).max(50),
-  image: z.string(),
-  calories: z.string(),
-  description: z.string().min(5).max(100),
-  instructions: z.string().min(10),
-  cuisine_type: z.string().min(3),
-  author: z.string().min(5).email(),
-});
-
-type TPayload = z.infer<typeof payloadSchema>;
+import { RecipePayload } from '@/lib/types/recipe';
 
 export async function POST(request: Request) {
   try {
@@ -43,7 +31,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const body: TPayload = await request.json();
+    const body: RecipePayload = await request.json();
 
     // Sanitizing inputs
     const sanitizedCalories = Number(body.calories);

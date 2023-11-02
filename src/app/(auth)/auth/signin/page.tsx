@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Lottie from 'lottie-react';
-import sushi from '@/assets/sushi-lottie.json';
+import sushi from '@/assets/lottie/sushi-lottie.json';
 import GoogleIcon from '@/components/icons/google';
 
 export default function SignIn() {
