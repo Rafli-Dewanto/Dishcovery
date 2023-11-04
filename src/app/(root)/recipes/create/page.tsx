@@ -1,5 +1,9 @@
 'use client';
 
+// TODO add input for instructions and ingredient
+// TODO sanitize html
+// FIXME hydration error 
+
 import { recipeSchema, type Recipe } from '@/lib/types/recipe';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

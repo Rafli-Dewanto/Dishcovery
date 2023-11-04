@@ -1,3 +1,5 @@
+// FIXME hydration error
+
 import { prisma } from '@/lib/db';
 import { getErrorMessage } from '@/utils/get-error';
 import Image from 'next/image';
