@@ -18,6 +18,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'freepngimg.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i0.wp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+      },
     ],
   },
 };

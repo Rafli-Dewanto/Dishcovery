@@ -12,7 +12,7 @@ export default function Footer() {
         </div>
         <div className="lg:flex lg:items-end lg:justify-between">
           <div>
-            <div className="flex justify-center text-teal-600 lg:justify-start">
+            <div className="flex justify-center text-pueblo-600 lg:justify-start">
               <Image
                 src={logo}
                 width={300}
@@ -54,9 +54,9 @@ export default function Footer() {
             <li>
               <Link
                 className="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
+                href={'/team'}
               >
-                Blog
+                Meet the team
               </Link>
             </li>
           </ul>
