@@ -7,9 +7,12 @@ import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <section className="mx-[0.850rem] flex flex-col gap-x-8 sm:flex-row">
+    <section
+      id="hero"
+      className="mx-[0.850rem] flex scroll-mb-96 flex-col gap-x-8 sm:flex-row"
+    >
       <div className="absolute right-[-30.5rem] -z-10 h-[31.25rem] w-[31.25rem] rounded-full bg-core-primary-500 blur-[40rem] sm:-right-10 sm:blur-[10rem] md:right-20 md:top-20"></div>
-      <div className="absolute left-[30rem] top-20 -z-10 h-[31.25rem] w-[31.25rem] rounded-full bg-core-primary-100 blur-[10rem]"></div>
+      <div className="absolute top-20 -z-10 h-[31.25rem] w-[31.25rem] rounded-full bg-core-primary-100 blur-[10rem] md:left-[30rem]"></div>
       <motion.section
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -46,7 +49,7 @@ const Hero = () => {
           recipes.
         </h3>
         {/* CTA Container */}
-        <div className="flex flex-col-reverse gap-x-2 sm:flex-row">
+        <div className="flex flex-col-reverse gap-x-2 xs:flex-row">
           <Link href={'#usecase'}>
             <Button
               className="
@@ -65,11 +68,11 @@ const Hero = () => {
           <Link href={'/recipes'}>
             <Button
               className="
-        mt-16 bg-core-accent-400 
-        py-5 
-        transition-all
+        mt-6 bg-core-accent-400 
+        py-5 transition-all
         hover:-translate-y-1
         hover:bg-core-accent-400
+        sm:mt-16
         "
             >
               Get Started 🍽️
@@ -77,7 +80,7 @@ const Hero = () => {
           </Link>
         </div>
       </motion.section>
-      <div className="mx-auto hidden scale-x-[-1] sm:block">
+      <div className="mx-auto hidden scale-x-[-1] md:block">
         <motion.div
           style={{
             transitionProperty: 'all;',

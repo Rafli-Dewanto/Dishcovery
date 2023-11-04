@@ -20,6 +20,9 @@ const config: Config = {
       },
     },
     extend: {
+      screens: {
+        xs: '400px',
+      },
       colors: {
         pueblo: {
           '50': '#fff7ed',
