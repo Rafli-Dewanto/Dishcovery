@@ -35,9 +35,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
           <time dateTime="2022-10-10" className="block text-xs text-white/90">
             10th Oct 2022
           </time>
-          <a href="#">
-            <h3 className="mt-0.5 text-lg text-white">{title}</h3>
-          </a>
+          <h3 className="mt-0.5 text-lg text-white">{title}</h3>
           <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
             {description}
           </p>

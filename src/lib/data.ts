@@ -1,3 +1,7 @@
+import exploreSvg from '@/assets/svg/explore.svg';
+import createSvg from '@/assets/svg/create.svg';
+import enjoySvg from '@/assets/svg/enjoy.svg';
+
 export const teams = [
   {
     name: 'Alvina Larasati Winarso',
@@ -48,5 +52,29 @@ export const teams = [
     name: 'Zaidan Abhinoya Athayumna',
     npm: '51421555',
     src: 'https://media.licdn.com/dms/image/C5603AQEGVIkFhOatEg/profile-displayphoto-shrink_400_400/0/1642600205245?e=1704326400&v=beta&t=Z9NxPIe6ys_QdmGvvv2hS0wpoLh14v5MW8ISbu_-WEM',
+  },
+] as const;
+
+export const usecases = [
+  {
+    title: 'Explore',
+    image: exploreSvg,
+    alt: 'explore recipe',
+    description:
+      'Discover a wide array of recipes from various cuisines and categories. Find new inspiration for your next meal!',
+  },
+  {
+    title: 'Create & Share',
+    image: createSvg,
+    alt: 'create recipe',
+    description:
+      'Craft your own unique recipes, share your culinary creations, and contribute to the community with your cooking expertise.',
+  },
+  {
+    title: 'Cook & Enjoy',
+    image: enjoySvg,
+    alt: 'enjoy',
+    description:
+      'Follow step-by-step guides, prepare delightful dishes, and savor the joy of cooking and relishing delicious homemade meals.',
   },
 ] as const;

@@ -46,7 +46,7 @@ export default function Navbar() {
     >
       {/* logo */}
       <Link href={'/'}>
-        <Image src={logo} alt="logo" width={250} height={250} />
+        <Image className="h-auto w-[15.625rem]" src={logo} alt="logo" />
       </Link>
       {/* menu */}
       <nav className="hidden sm:block">

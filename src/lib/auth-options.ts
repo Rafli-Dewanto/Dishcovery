@@ -2,6 +2,7 @@ import { prisma } from '@/lib/db';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
 import type { NextAuthOptions } from 'next-auth';
+import type { SessionWithToken } from '@/lib/types';
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -24,9 +25,9 @@ export const options: NextAuthOptions = {
       });
       let accessToken: string | null = null;
       if (getToken) {
-        accessToken = getToken.access_token!;
+        accessToken = getToken.access_token;
       }
-      session.user.token = accessToken;
+      (session.user as SessionWithToken).token = accessToken;
       return session;
     },
   },

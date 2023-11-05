@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import logo from '@/assets/svg/dishcovery.svg';
 import Link from 'next/link';
@@ -14,9 +16,8 @@ export default function Footer() {
           <div>
             <div className="flex justify-center text-pueblo-600 lg:justify-start">
               <Image
+                className="h-auto w-[18.75rem]"
                 src={logo}
-                width={300}
-                height={300}
                 alt="dishcovery logo"
               />
             </div>

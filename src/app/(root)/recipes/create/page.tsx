@@ -1,9 +1,5 @@
 'use client';
 
-// TODO add input for instructions and ingredient
-// TODO sanitize html
-// FIXME hydration error 
-
 import { recipeSchema, type Recipe } from '@/lib/types/recipe';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -20,21 +16,23 @@ import {
 import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/upload/single-image';
 import { Textarea } from '@/components/ui/textarea';
-import { default as InstructionsEditor } from '@/components/wysiwyg/instructions-editor';
+import { InstructionsEditor } from '@/components/wysiwyg';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useEdgeStore } from '@/lib/edgestore';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-import { getErrorMessage } from '@/utils/get-error';
+import { getErrorMessage } from '@/utils';
 
 const CreateRecipePage = () => {
   const { data: session } = useSession();
   const { edgestore } = useEdgeStore();
+
   const form = useForm<Recipe>({
     resolver: zodResolver(recipeSchema),
     mode: 'onChange',
   });
+
   const [alertMessage, setAlertMessage] = useState('');
 
   if (!session) {
@@ -135,6 +133,7 @@ const CreateRecipePage = () => {
               </FormItem>
             )}
           />
+          {/* // TODO add input for instructions and ingredient */}
           <FormField
             control={form.control}
             name="cuisine_type"
