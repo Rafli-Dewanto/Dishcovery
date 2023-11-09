@@ -70,7 +70,8 @@ const CreateRecipePage = () => {
   }
 
   return (
-    <section className="container relative min-h-screen">
+    <section className="container relative min-h-screen max-w-3xl my-10">
+      <h1 className='text-2xl font-bold text-start mb-10'>Share your recipe!</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -80,7 +81,7 @@ const CreateRecipePage = () => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Recipe title" {...field} />
+                  <Input className={`focus-visible:outline-pueblo-400 ${true ? "" : ""}`} placeholder="Recipe title" {...field} />
                 </FormControl>
                 <FormDescription>Your Recipe Title</FormDescription>
                 <FormMessage />
@@ -94,7 +95,7 @@ const CreateRecipePage = () => {
               <FormItem>
                 <FormLabel>Calories</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="calories" {...field} />
+                  <Input className='focus-visible:outline-pueblo-400' type="number" placeholder="calories" {...field} />
                 </FormControl>
                 <FormDescription>
                   How much calories your recipe contains
@@ -110,7 +111,7 @@ const CreateRecipePage = () => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="description" {...field} />
+                  <Textarea className='focus-visible:outline-pueblo-400' placeholder="description" {...field} />
                 </FormControl>
                 <FormDescription>
                   Short description about your recipe
@@ -174,9 +175,9 @@ const CreateRecipePage = () => {
             disabled={form.formState.isSubmitting}
             className="
           bg-pueblo-500
+          hover:bg-pueblo-600
           transition-all
-          hover:scale-105 
-          hover:bg-pueblo-600 
+          hover:scale-105
           active:scale-100"
             type="submit"
           >

@@ -9,10 +9,12 @@ import { isRecipeExists } from '@/utils';
 const RecipeDetailPage = async ({ params }: { params: { slug: string } }) => {
   // recipe is type string | object | null
   const { data, errorMessage: error } = await getRecipe(params.slug);
-
+  
+  
   // validation
   if (isRecipeExists(data)) {
-    const recipe = data as Recipe; // typescript still assume that data might be null | undefined, so we have to cast it
+    // typescript still assumes that data might be null | undefined after validation, so we have to cast it
+    const recipe = data as Recipe;
     return (
       <main className="container grid min-h-screen grid-cols-1 justify-items-center">
         <h1>{recipe.name}</h1>

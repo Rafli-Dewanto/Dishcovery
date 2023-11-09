@@ -27,25 +27,25 @@ const ToolBar: React.FC<ToolBarProps> = ({ editor }) => {
         border border-input 
         bg-transparent rounded-lg 
         my-1 px-2 py-1 space-x-3
-        max-w-[80%]
+        w-full
         '>
             <Toggle
                 size={'sm'}
-                pressed={editor.isActive('heading')}
+                pressed={editor.isActive('h1')}
                 onPressedChange={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
             >
                 <Heading1 className='h-4 w-4' />
             </Toggle>
             <Toggle
                 size={'sm'}
-                pressed={editor.isActive('heading')}
+                pressed={editor.isActive('h2')}
                 onPressedChange={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
             >
                 <Heading2 className='h-4 w-4' />
             </Toggle>
             <Toggle
                 size={'sm'}
-                pressed={editor.isActive('heading')}
+                pressed={editor.isActive('h3')}
                 onPressedChange={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
             >
                 <Heading3 className='h-4 w-4' />

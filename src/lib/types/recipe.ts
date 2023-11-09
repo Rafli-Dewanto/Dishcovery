@@ -9,7 +9,9 @@ export const recipePayloadSchema = z.object({
   image: z.string(),
   calories: z.string(),
   description: z.string().min(5).max(100).trim(),
-  instructions: z.string().min(10),
+  instructions: z
+    .string()
+    .min(10, { message: 'Instructions must contain at least 10 character(s)' }),
   cuisine_type: z.string().min(3),
   author: z.string().min(5).email(),
 });
