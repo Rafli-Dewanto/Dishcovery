@@ -1,46 +1,60 @@
-import { getAuthSession } from '@/app/api/auth/[...nextauth]/route';
+import { getUser } from '@/app/api/auth/[...nextauth]/route';
 import RecipeCard from '@/components/ui/recipe-card';
 import { prisma } from '@/lib/db';
+import { getErrorMessage } from '@/utils';
+import { Recipe } from '@prisma/client';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-async function getRecipes() {
-  const data = await prisma.recipe.findMany();
-  return data;
+type RecipeTuple = [Recipe[] | null, null | string];
+
+async function getRecipes(): Promise<RecipeTuple> {
+  try {
+    const data = await prisma.recipe.findMany();
+    return [data, null];
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return [null, message];
+  }
 }
 
 export default async function Page() {
-  const recipes = await getRecipes();
-  const session = await getAuthSession();
+  const [recipes, recipesError] = await getRecipes();
+  const [session, sessionError] = await getUser();
 
-  if (!session) {
-    redirect('/api/auth/signin?callbackUrl=/recipes');
+  if (!session || sessionError !== null) {
+    redirect('/api/auth/signin/callbackUrl=/recipes');
   }
 
   return (
     <main
       className="
-    container grid 
-    min-h-screen grid-cols-1 
+    container grid
+    min-h-screen grid-cols-1
     gap-x-4
-    gap-y-4 py-8 
-    sm:grid-cols-3 
-    md:grid-cols-2 
+    gap-y-4 py-8
+    sm:grid-cols-3
+    md:grid-cols-2
     lg:grid-cols-4
     "
     >
-      {recipes.map((recipe, idx) => (
-        <>
-          <Link href={`/recipes/${recipe.id}`}>
-            <RecipeCard
-              key={recipe.id}
-              description={recipe.description}
-              image={recipe.image}
-              title={recipe.name}
-            />
-          </Link>
-        </>
-      ))}
+      {/* // TODO: Design recipe detail */}
+      {recipes && recipesError === null ? (
+        recipes?.map((recipe, idx) => (
+          <>
+            <Link href={`/recipes/${recipe.id}`}>
+              <RecipeCard
+                key={recipe.id}
+                description={recipe.description}
+                image={recipe.image}
+                title={recipe.name}
+              />
+            </Link>
+          </>
+        ))
+      ) : (
+        <>{recipesError}</>
+      )}
       <RecipeCard
         description="lorem ipsum"
         image="https://files.edgestore.dev/qxmsdgmhykx7ohva/publicImages/_public/32e7bea5-29cb-4d11-aab7-d6320300856c.png"
