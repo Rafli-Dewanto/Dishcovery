@@ -20,9 +20,9 @@ async function getRecipes(): Promise<RecipeTuple> {
 
 export default async function Page() {
   const [recipes, recipesError] = await getRecipes();
-  const [session, sessionError] = await getUser();
+  const [user, userError] = await getUser();
 
-  if (!session || sessionError !== null) {
+  if (!user || userError !== null) {
     redirect('/api/auth/signin/callbackUrl=/recipes');
   }
 
@@ -40,7 +40,7 @@ export default async function Page() {
     >
       {/* // TODO: Design recipe detail */}
       {recipes && recipesError === null ? (
-        recipes?.map((recipe, idx) => (
+        recipes?.map((recipe) => (
           <>
             <Link href={`/recipes/${recipe.id}`}>
               <RecipeCard

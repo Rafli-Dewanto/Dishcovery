@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/upload/single-image';
 import { Textarea } from '@/components/ui/textarea';
 import { InstructionsEditor } from '@/components/wysiwyg';
+import { IngredientsEditor } from '@/components/wysiwyg';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useEdgeStore } from '@/lib/edgestore';
@@ -77,6 +78,7 @@ const CreateRecipePage = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
+            defaultValue=''
             control={form.control}
             name="name"
             render={({ field }) => (
@@ -84,9 +86,8 @@ const CreateRecipePage = () => {
                 <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input
-                    className={`focus-visible:outline-pueblo-400 ${
-                      true ? '' : ''
-                    }`}
+                    className={`focus-visible:outline-pueblo-400 ${true ? '' : ''
+                      }`}
                     placeholder="Recipe title"
                     {...field}
                   />
@@ -97,6 +98,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
+            defaultValue=''
             control={form.control}
             name="calories"
             render={({ field }) => (
@@ -118,6 +120,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
+            defaultValue=''
             control={form.control}
             name="description"
             render={({ field }) => (
@@ -138,6 +141,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
+            defaultValue=''
             control={form.control}
             name="instructions"
             render={({ field }) => (
@@ -151,8 +155,25 @@ const CreateRecipePage = () => {
               </FormItem>
             )}
           />
+          { /*  Ingredients Editor     */}
+          <FormField
+            defaultValue=''
+            control={form.control}
+            name="ingredients"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Ingredients</FormLabel>
+                <FormControl>
+                  <IngredientsEditor onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>List all the ingredietns</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           {/* // TODO add input for instructions and ingredient */}
           <FormField
+            defaultValue=''
             control={form.control}
             name="cuisine_type"
             render={({ field }) => (

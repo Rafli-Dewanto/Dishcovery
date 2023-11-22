@@ -55,12 +55,14 @@ export async function POST(request: Request) {
     }
 
     // Creating new recipe
+    console.log(body.ingredients);
     const newRecipe = await prisma.recipe.create({
       data: {
         name: body.name,
         calories: sanitizedCalories,
         description: body.description,
         instructions: body.instructions,
+        ingredients: body.ingredients,
         image: body.image,
         cuisineType: body.cuisine_type,
         userId: author.id,

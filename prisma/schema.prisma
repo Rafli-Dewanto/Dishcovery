@@ -73,6 +73,7 @@ model Recipe {
   calories     Int
   description  String    @db.Text
   instructions String    @db.LongText
+  ingredients  String    @db.LongText
   image        String
   cuisineType  String    @map("cuisine_type") @db.VarChar(30)
   avgRating    Decimal   @default(0) @map("avg_rating") @db.Decimal(1, 1)
