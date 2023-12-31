@@ -6,7 +6,7 @@ type ProfileProps = {
   npm: string;
 };
 
-export default function Profile({ src, name, npm }: ProfileProps) {
+export default async function Profile({ src, name, npm }: ProfileProps) {
   return (
     <div className="w-full p-2 md:w-1/2 lg:w-1/3">
       <div className="flex h-full items-center rounded-lg border border-gray-200 p-4">

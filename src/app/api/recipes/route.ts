@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/db';
 import { getErrorMessage } from '@/utils/get-error';
 import { RecipePayload } from '@/lib/types/recipe';
+import * as DOMPurify from 'dompurify';
 
 export async function POST(request: Request) {
   try {
@@ -61,8 +62,8 @@ export async function POST(request: Request) {
         name: body.name,
         calories: sanitizedCalories,
         description: body.description,
-        instructions: body.instructions,
-        ingredients: body.ingredients,
+        instructions: DOMPurify.sanitize(body.instructions, { USE_PROFILES: { html: true } }),
+        ingredients: DOMPurify.sanitize(body.ingredients, { USE_PROFILES: { html: true } }),
         image: body.image,
         cuisineType: body.cuisine_type,
         userId: author.id,

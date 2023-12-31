@@ -27,7 +27,7 @@ export const options: NextAuthOptions = {
       if (getToken) {
         accessToken = getToken.access_token;
       }
-      (session.user as SessionWithToken).token = accessToken;
+      session.user.token = accessToken;
       return session;
     },
   },

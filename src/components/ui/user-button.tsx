@@ -4,6 +4,7 @@ import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 
 type UserButtonProps = {
   profilePic: string;
@@ -62,7 +63,9 @@ export default function UserButton({
             <p className="font-semibold">{username}</p>
             {/* user menu */}
             <div className="my-4 flex w-full justify-start">
-              <p>My Profile</p>
+              <Link href='/profile'>
+                <p>My Profile</p>
+              </Link>
             </div>
             <Separator />
           </section>

@@ -2,7 +2,7 @@ import { getUser } from '@/app/api/auth/[...nextauth]/route';
 import RecipeCard from '@/components/ui/recipe-card';
 import { prisma } from '@/lib/db';
 import { getErrorMessage } from '@/utils';
-import { Recipe } from '@prisma/client';
+import { type Recipe } from '@prisma/client';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -20,7 +20,7 @@ async function getRecipes(): Promise<RecipeTuple> {
 
 export default async function Page() {
   const [recipes, recipesError] = await getRecipes();
-  const [user, userError] = await getUser();
+  const { session: user, error: userError } = await getUser();
 
   if (!user || userError !== null) {
     redirect('/api/auth/signin/callbackUrl=/recipes');

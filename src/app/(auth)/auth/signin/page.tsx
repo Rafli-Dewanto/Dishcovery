@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { signIn, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
@@ -10,10 +10,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import Lottie from 'lottie-react';
 import sushi from '@/assets/lottie/sushi-lottie.json';
 import GoogleIcon from '@/components/icons/google';
+import GoogleButton from '@/components/auth/google.button';
+import { getUser } from '@/app/api/auth/[...nextauth]/route';
 
 export default function SignIn() {
   const session = useSession();
@@ -36,28 +37,9 @@ export default function SignIn() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex w-full items-center justify-center">
-          <Button
-            onClick={() => signIn('google')}
-            className="
-            gap-x-2 border 
-            border-pueblo-400 bg-white
-            px-10
-            py-8
-            text-gray-950
-            hover:bg-pueblo-50
-            sm:py-6"
-          >
-            <span>
-              <GoogleIcon />
-            </span>
-            Continue With Google
-          </Button>
+          <GoogleButton />
         </CardContent>
       </Card>
-      <Lottie
-        animationData={sushi}
-        className="absolute bottom-20 right-2 h-[20rem] w-[20rem]"
-      />
     </>
   );
 }

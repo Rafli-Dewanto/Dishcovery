@@ -19,6 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={GeistSans.className}>
+        {/* //FIXME: session type  */}
         <SessionProvider session={session}>
           <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </SessionProvider>

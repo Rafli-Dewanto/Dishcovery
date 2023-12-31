@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
 import { prisma } from '@/lib/db';
 import { getErrorMessage } from '@/utils/get-error';
 
@@ -9,6 +10,16 @@ interface Params {
 }
 
 export async function GET(_req: Request, { params }: Params) {
+  const token = headers().get("Authorization")?.split(" ")[1];
+  console.log(token);
+  /*if (!token || token === undefined || token === null) {
+    return NextResponse.json({
+      message: "Forbidden: no token provided, please sign in"
+    }, {
+      status: 403
+    })
+  }*/
+
   const id = params.id;
   try {
     const data = await prisma.recipe.findFirst({
@@ -16,7 +27,7 @@ export async function GET(_req: Request, { params }: Params) {
         id,
       },
     });
-    if (data === null || data === undefined) {
+    if (data == null) {
       return NextResponse.json(
         {
           message: 'not found',

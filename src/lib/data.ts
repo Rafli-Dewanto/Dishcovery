@@ -36,7 +36,7 @@ export const teams = [
   {
     name: 'Rafli Satya Dewanto',
     npm: '51421208',
-    src: 'https://media.licdn.com/dms/image/D5603AQEljt1TTN_XTA/profile-displayphoto-shrink_400_400/0/1698132287149?e=1703721600&v=beta&t=8EloIgK1KYqc1J2v4CltpWSMFe2iGSa_CwR2UtQ4In4',
+    src: 'https://media.licdn.com/dms/image/D5603AQEljt1TTN_XTA/profile-displayphoto-shrink_400_400/0/1698132288654?e=1709164800&v=beta&t=IQ7nZP885ecVMHjGkGRvCTy6mOlXZUNgCzIC9TwPU8k',
   },
   {
     name: 'Rasya Rachman Hakim',

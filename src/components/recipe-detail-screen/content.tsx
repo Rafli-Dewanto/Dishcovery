@@ -3,13 +3,10 @@ import React, {
   HTMLAttributes,
   forwardRef,
   type ForwardedRef,
-  useEffect,
-  useState,
 } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { Recipe } from '@prisma/client';
-import { handleFetch } from '@/utils';
 
 interface ContentProps extends HTMLAttributes<HTMLDivElement> {
   recipe: Recipe;
