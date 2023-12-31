@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   motion,
   useTransform,
   useScroll,
   useVelocity,
   useSpring,
-} from "framer-motion";
-import { Content } from "./content";
-import { Recipe } from "@prisma/client";
+} from 'framer-motion';
+import { Content } from './content';
+import { Recipe } from '@prisma/client';
 
 export const TracingBeam = ({ recipe }: { recipe: Recipe }) => {
   // track scroll progress across page
@@ -41,18 +41,18 @@ export const TracingBeam = ({ recipe }: { recipe: Recipe }) => {
     {
       stiffness: 500,
       damping: 90,
-    }
+    },
   );
   const y2 = useSpring(
     useTransform(scrollYProgress, [0, 1], [50, svgHeight - velo * 2000]),
     {
       stiffness: 500,
       damping: 90,
-    }
+    },
   );
 
   return (
-    <motion.div className="relative w-full max-w-4xl mx-auto h-full">
+    <motion.div className="relative mx-auto h-full w-full max-w-4xl">
       <div className="absolute -left-20 top-3">
         <motion.div
           transition={{
@@ -62,10 +62,10 @@ export const TracingBeam = ({ recipe }: { recipe: Recipe }) => {
           animate={{
             boxShadow:
               scrollYProgress.get() > 0
-                ? "none"
-                : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                ? 'none'
+                : 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
           }}
-          className="ml-[27px] h-4 w-4 rounded-full border border-netural-200 shadow-sm flex items-center justify-center"
+          className="border-netural-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
         >
           <motion.div
             transition={{
@@ -73,10 +73,8 @@ export const TracingBeam = ({ recipe }: { recipe: Recipe }) => {
               delay: 0.5,
             }}
             animate={{
-              backgroundColor:
-                scrollYProgress.get() > 0 ? "white" : "#f87117",
-              borderColor:
-                scrollYProgress.get() > 0 ? "white" : "#f87117",
+              backgroundColor: scrollYProgress.get() > 0 ? 'white' : '#f87117',
+              borderColor: scrollYProgress.get() > 0 ? 'white' : '#f87117',
             }}
             className="h-2 w-2 rounded-full border border-neutral-300 bg-white"
           />
@@ -128,5 +126,3 @@ export const TracingBeam = ({ recipe }: { recipe: Recipe }) => {
     </motion.div>
   );
 };
-
-

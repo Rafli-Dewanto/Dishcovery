@@ -1,9 +1,4 @@
-
-import React, {
-  HTMLAttributes,
-  forwardRef,
-  type ForwardedRef,
-} from 'react';
+import React, { HTMLAttributes, forwardRef, type ForwardedRef } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { Recipe } from '@prisma/client';
@@ -14,7 +9,6 @@ interface ContentProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Content = forwardRef<HTMLDivElement, ContentProps>(
   ({ recipe, ...props }, ref: ForwardedRef<HTMLDivElement>) => {
-
     return (
       <div ref={ref} className="mx-auto max-w-2xl  pt-4 ">
         <div key={recipe?.id} className="mb-10">
@@ -43,7 +37,9 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
             )}
             {recipe?.description}
             <br />
-            <section dangerouslySetInnerHTML={{ __html: recipe?.instructions }}></section>
+            <section
+              dangerouslySetInnerHTML={{ __html: recipe?.instructions }}
+            ></section>
           </div>
         </div>
       </div>

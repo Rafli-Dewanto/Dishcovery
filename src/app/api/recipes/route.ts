@@ -62,8 +62,12 @@ export async function POST(request: Request) {
         name: body.name,
         calories: sanitizedCalories,
         description: body.description,
-        instructions: DOMPurify.sanitize(body.instructions, { USE_PROFILES: { html: true } }),
-        ingredients: DOMPurify.sanitize(body.ingredients, { USE_PROFILES: { html: true } }),
+        instructions: DOMPurify.sanitize(body.instructions, {
+          USE_PROFILES: { html: true },
+        }),
+        ingredients: DOMPurify.sanitize(body.ingredients, {
+          USE_PROFILES: { html: true },
+        }),
         image: body.image,
         cuisineType: body.cuisine_type,
         userId: author.id,

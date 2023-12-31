@@ -78,7 +78,7 @@ const CreateRecipePage = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="name"
             render={({ field }) => (
@@ -86,8 +86,9 @@ const CreateRecipePage = () => {
                 <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input
-                    className={`focus-visible:outline-pueblo-400 ${true ? '' : ''
-                      }`}
+                    className={`focus-visible:outline-pueblo-400 ${
+                      true ? '' : ''
+                    }`}
                     placeholder="Recipe title"
                     {...field}
                   />
@@ -98,7 +99,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="calories"
             render={({ field }) => (
@@ -120,7 +121,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="description"
             render={({ field }) => (
@@ -141,7 +142,7 @@ const CreateRecipePage = () => {
             )}
           />
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="instructions"
             render={({ field }) => (
@@ -155,9 +156,9 @@ const CreateRecipePage = () => {
               </FormItem>
             )}
           />
-          { /*  Ingredients Editor     */}
+          {/*  Ingredients Editor     */}
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="ingredients"
             render={({ field }) => (
@@ -173,7 +174,7 @@ const CreateRecipePage = () => {
           />
           {/* // TODO add input for instructions and ingredient */}
           <FormField
-            defaultValue=''
+            defaultValue=""
             control={form.control}
             name="cuisine_type"
             render={({ field }) => (

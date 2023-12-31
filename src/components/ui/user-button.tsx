@@ -63,7 +63,7 @@ export default function UserButton({
             <p className="font-semibold">{username}</p>
             {/* user menu */}
             <div className="my-4 flex w-full justify-start">
-              <Link href='/profile'>
+              <Link href="/profile">
                 <p>My Profile</p>
               </Link>
             </div>

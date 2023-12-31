@@ -38,9 +38,7 @@ export const Heading = BaseHeading.configure({ levels: [1, 2, 3] }).extend({
   },
 });
 
-const IngredientsEditor: React.FC<IngredientsEditorProps> = ({
-  onChange,
-}) => {
+const IngredientsEditor: React.FC<IngredientsEditorProps> = ({ onChange }) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({

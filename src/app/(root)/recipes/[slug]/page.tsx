@@ -8,7 +8,7 @@ const RecipeDetailPage = async ({ params }: { params: { slug: string } }) => {
         <Recipe slug={params.slug} />
       </Suspense>
     </main>
-  )
+  );
 };
 
 export default RecipeDetailPage;

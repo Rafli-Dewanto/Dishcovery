@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
 import RatingIcons from '../icons/rating-icons';
 
 const usersReviews = [
@@ -14,13 +14,15 @@ const usersReviews = [
     name: 'Michael Smith',
     review:
       "Dishcovery has made cooking so much fun! The variety of recipes is amazing. I've tried several and they've all turned out delicious.",
-    avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
+    avatar:
+      'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww',
   },
   {
     name: 'Sophia Williams',
     review:
       "I'm impressed with Dishcovery. It's a great app with a wide range of recipes. I especially love the step-by-step instructions.",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YXZhdGFyfGVufDB8fDB8fHww"
+    avatar:
+      'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YXZhdGFyfGVufDB8fDB8fHww',
   },
 ] as const;
 
@@ -45,14 +47,12 @@ const UserReview = () => {
                 </p>
               </div>
             </div>
-            <p className="mt-4 text-gray-700">
-              {review.review}
-            </p>
+            <p className="mt-4 text-gray-700">{review.review}</p>
           </blockquote>
         </React.Fragment>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default UserReview
+export default UserReview;

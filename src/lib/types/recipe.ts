@@ -12,9 +12,7 @@ export const recipePayloadSchema = z.object({
   instructions: z
     .string()
     .min(10, { message: 'Instructions must contain at least 10 character(s)' }),
-  ingredients: z
-    .string()
-    .min(5),
+  ingredients: z.string().min(5),
   cuisine_type: z.string().min(3),
   author: z.string().min(5).email(),
 });

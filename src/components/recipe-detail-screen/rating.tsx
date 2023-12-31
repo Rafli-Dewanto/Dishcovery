@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 // components/Rating.js
 import { useState } from 'react';
@@ -7,7 +7,9 @@ const Star = ({ selected = false, onSelect = () => {} }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`h-6 w-6 cursor-pointer ${selected ? 'text-yellow-500' : 'text-gray-300'}`}
+      className={`h-6 w-6 cursor-pointer ${
+        selected ? 'text-yellow-500' : 'text-gray-300'
+      }`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -35,7 +37,9 @@ const Rating = ({ totalStars = 5 }) => {
           onSelect={() => setRating(index + 1)}
         />
       ))}
-      <p className="ml-2 text-gray-600">{rating}/{totalStars}</p>
+      <p className="ml-2 text-gray-600">
+        {rating}/{totalStars}
+      </p>
     </div>
   );
 };

@@ -10,7 +10,7 @@ interface Params {
 }
 
 export async function GET(_req: Request, { params }: Params) {
-  const token = headers().get("Authorization")?.split(" ")[1];
+  const token = headers().get('Authorization')?.split(' ')[1];
   console.log(token);
   /*if (!token || token === undefined || token === null) {
     return NextResponse.json({
