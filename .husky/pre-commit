@@ -2,9 +2,10 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run prettier
+git add .
 npm run lint
 
 if [ $? -ne 0 ]; then
-    echo "Error: Commit failed. Please fix the issues before committing."
-    exit 1
+  echo "Error: Commit failed. Please fix the issues before committing."
+  exit 1
 fi
