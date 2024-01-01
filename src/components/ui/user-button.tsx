@@ -1,10 +1,11 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 type UserButtonProps = {
   profilePic: string;
@@ -21,6 +22,10 @@ export default function UserButton({
   setIsActive,
   image,
 }: UserButtonProps) {
+  const { data } = useSession();
+  if (data == null) return redirect('/auth/signin/callbackUrl=/');
+  const isAccountOwner = data.user.name === '';
+
   return (
     <div className="relative">
       <Image
@@ -63,7 +68,7 @@ export default function UserButton({
             <p className="font-semibold">{username}</p>
             {/* user menu */}
             <div className="my-4 flex w-full justify-start">
-              <Link href="/profile">
+              <Link href={`/${encodeURI(data.user.name as string)}`}>
                 <p>My Profile</p>
               </Link>
             </div>

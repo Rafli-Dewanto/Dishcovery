@@ -1,19 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Define the file patterns to check
-file_patterns="*.js *.jsx *.ts *.tsx"
-
-# Check each file for lines containing "console.*"
-for file in $(git diff --cached --name-only --diff-filter=ACMRTUXB $file_patterns); do
-  if grep -q "console\." "$file"; then
-    # Remove lines containing "console.*" from the file
-    sed -i '/console\./d' "$file"
-    echo "Removed console statements from $file"
-    # Stage the changes
-    git add "$file"
-  fi
-done
 npm run prettier
 git add .
 npm run lint

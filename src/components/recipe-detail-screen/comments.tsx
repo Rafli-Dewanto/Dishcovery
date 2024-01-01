@@ -15,7 +15,7 @@ import {
 
 export default function Comment() {
   return (
-    <main className="space-y-8 bg-orange-50 p-10">
+    <main className="w-full space-y-8 bg-orange-50 p-10">
       <h2 className="text-3xl font-bold text-orange-800">Leave a Comment</h2>
       <div className="space-y-4 rounded-md bg-white p-5 shadow-md">
         <div className="space-y-2">
