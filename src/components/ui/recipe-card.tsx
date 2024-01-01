@@ -5,42 +5,37 @@ type RecipeCardProps = {
   title: string;
   description: string;
   image: string;
+  category: string;
+  time: string;
 };
 
-const RecipeCard: React.FC<RecipeCardProps> = ({
-  title,
-  description,
-  image,
-}) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ title, description, image, category, time }) => {
   return (
-    <article
-      className="
-        relative cursor-pointer 
-        overflow-hidden rounded-lg 
-        shadow 
-        transition-all 
-        hover:scale-105
-        hover:shadow-lg
-        "
-    >
+    <article className="bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:text-orange-500 hover:underline">
       <Image
         width={400}
         height={600}
-        alt="Office"
-        src={`${image}`}
-        className="absolute inset-0 h-full w-full object-cover"
+        alt={title}
+        src={image}
+        className="object-cover w-full h-48 sm:h-60 lg:h-80"
       />
-      <div className="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-        <div className="p-4 sm:p-6">
-          <time dateTime="2022-10-10" className="block text-xs text-white/90">
-            10th Oct 2022
-          </time>
-          <a href="#">
-            <h3 className="mt-0.5 text-lg text-white">{title}</h3>
-          </a>
-          <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-            {description}
-          </p>
+      <div className="p-4 sm:p-6">
+        <time dateTime="2022-10-10" className="block text-xs text-gray-500">
+          10th Oct 2022
+        </time>
+        <a href="#" className="mt-2 text-2xl font-semibold text-gray-900">
+          {title}
+        </a>
+        <p className="mt-2 text-base text-gray-700 line-clamp-3">
+          {description}
+        </p>
+        <div className="mt-4">
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+            {category}
+          </span>
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+            {time}
+          </span>
         </div>
       </div>
     </article>
