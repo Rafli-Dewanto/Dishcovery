@@ -22,13 +22,13 @@ export default async function Page() {
     lg:grid-cols-4
     "
     >
-        <RecipeCard
+      <RecipeCard
         description="lorem ipsum"
         image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=2960&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         title="Salad"
         category="dadadasddadsa"
         time="1 min"
-        />
+      />
 
       <RecipeCard
         description="lorem ipsum"
