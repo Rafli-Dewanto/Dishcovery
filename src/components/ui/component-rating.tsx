@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface StarRatingProps {
   title: string;
@@ -19,15 +19,15 @@ const StarRatingCard: React.FC<StarRatingProps> = ({ title }) => {
       stars.push(
         <svg
           key={i}
-          className={`w-6 h-6 cursor-pointer fill-current ${
-            i <= rating ? 'text-yellow-500' : 'text-gray-300'
+          className={`h-6 w-6 cursor-pointer fill-current ${
+            i <= rating ? "text-yellow-500" : "text-gray-300"
           }`}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           onClick={() => handleStarClick(i)}
         >
           <path d="M12 2l2.4 6.2H20l-5 4.8 1.7 6.3-5.7-4.3-5.7 4.3L7 13 2 7.8h7.6L12 2z" />
-        </svg>
+        </svg>,
       );
     }
 
@@ -35,10 +35,10 @@ const StarRatingCard: React.FC<StarRatingProps> = ({ title }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-      <h2 className="text-lg font-semibold mb-2">{title}</h2>
-      <p className="text-gray-500 mb-2">Rating: {rating}/5</p>
-      <div className="flex mb-4">{renderStars()}</div>
+    <div className="flex flex-col items-center rounded-lg bg-white p-6 shadow">
+      <h2 className="mb-2 text-lg font-semibold">{title}</h2>
+      <p className="mb-2 text-gray-500">Rating: {rating}/5</p>
+      <div className="mb-4 flex">{renderStars()}</div>
     </div>
   );
 };
