@@ -181,8 +181,7 @@ export default function PrivacyPolicy() {
             of recipes you interact with, we can provide you with
             recommendations that are more aligned with your interests and needs.
           </p>
-
-          <p className="mzb-3 font-bold">Data Security and Protection</p>
+          <p className="mb-3 font-bold">Data Security and Protection</p>
           <p className="mb-3">
             Security Measures: We implement security measures to protect your
             data from unauthorized access or disclosure. While we take security
